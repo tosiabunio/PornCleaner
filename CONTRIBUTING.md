@@ -27,4 +27,6 @@ A new whole-site scope entry expands deletion to the parent and its subdomains. 
 
 Describe the problem, resulting behavior, and validation performed. Keep generated builds and local browser profiles out of the change. For bugs, provide synthetic reproduction steps; public issues should contain no personal browsing history.
 
-GitHub Actions runs the build and browser checks from the committed dataset. It uploads the extension ZIP and synthetic test results, and does not collect or promote domain updates.
+The browser-test command packages the end-user download, extracts it into a temporary directory, and tests that exact extension. The offline installation-guide templates live in `distribution/`.
+
+GitHub Actions runs the build and browser checks from the committed dataset. CI uploads the distribution ZIP and synthetic test results without collecting or promoting domain updates. The separate **Prepare release** workflow creates a tested draft release for manual publication.

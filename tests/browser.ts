@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict';
-import { mkdtemp, mkdir, writeFile, readFile, cp, rm } from 'node:fs/promises';
+import { mkdtemp, mkdir, writeFile, readFile, rm } from 'node:fs/promises';
+import { execFileSync } from 'node:child_process';
+import { pathToFileURL } from 'node:url';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import type { BrowserContext, Page } from 'playwright';
@@ -10,9 +12,12 @@ const { chromium } = await import('playwright');
 type Status = ReturnType<Engine['status']>;
 const root = await mkdtemp(path.join(tmpdir(), 'porncleaner-browser-test-'));
 const profile = path.join(root, 'profile');
-const extension = path.join(root, 'extension');
+const extracted = path.join(root, 'download');
+const extension = path.join(extracted, 'PornCleaner', 'Chrome');
 const seeder = path.join(root, 'seeder');
-await cp('dist', extension, { recursive: true }); await mkdir(seeder);
+await mkdir(extracted);
+execFileSync('/usr/bin/unzip', ['-q', path.resolve('artifacts/porncleaner-chrome.zip'), '-d', extracted]);
+await mkdir(seeder);
 await mkdir('artifacts', { recursive: true });
 await writeFile(path.join(seeder, 'manifest.json'), JSON.stringify({ manifest_version: 3, name: 'PornCleaner isolated test seeder', version: '1.0',
   permissions: ['history'], background: { service_worker: 'seed.js' } }));
@@ -67,7 +72,7 @@ try {
   assert.equal(first.settings.enabled, true); assert.equal(first.job!.deleted, 1250);
   const remaining = await history(page); assert.ok(seedURLs.every(url => !remaining.includes(url)));
   assert.ok(keepURLs.every(url => remaining.includes(url)));
-  pass('Production build cleans 1,250 existing URLs across capped queries and preserves all control URLs');
+  pass('Distribution ZIP cleans 1,250 existing URLs across capped queries and preserves all control URLs');
 
   const future = 'https://xhamster.com/__porncleaner_synthetic__/new';
   await add(page, [future]); await until(() => history(page), urls => !urls.includes(future), 'visit cleanup');
@@ -145,8 +150,21 @@ try {
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false, 'narrow layout should not overflow');
   assert.deepEqual(pageErrors, []); assert.deepEqual(externalRequests, []);
   pass('Popup and management page render without script errors, overflow, or external requests');
+  const guide = await context.newPage();
+  await guide.goto(pathToFileURL(path.join(extracted, 'PornCleaner', 'START-HERE.html')).href);
+  await guide.setViewportSize({ width: 1100, height: 1000 });
+  await guide.getByRole('heading', { name: 'Select the Chrome folder' }).waitFor();
+  assert.ok((await guide.locator('body').innerText()).includes('Cleaning starts as soon as you install.'));
+  assert.ok(!(await guide.locator('body').innerText()).includes('{{VERSION}}'));
+  assert.equal(await guide.locator('ol > li').count(), 4);
+  await guide.screenshot({ path: 'artifacts/install-guide.png', fullPage: true });
+  await guide.setViewportSize({ width: 390, height: 844 });
+  assert.equal(await guide.evaluate(() => document.documentElement.scrollWidth > innerWidth), false, 'installation guide should fit a narrow screen');
+  await guide.screenshot({ path: 'artifacts/install-guide-mobile.png', fullPage: true });
+  assert.deepEqual(pageErrors, []); assert.deepEqual(externalRequests, []);
+  pass('Packaged installation guide works offline with desktop and narrow layouts');
   await writeFile('artifacts/browser-test-report.json', JSON.stringify({ passed, failed: [], browser: await context.browser()?.version(),
-    datasetVersion: first.dataset.version, domainCount: first.dataset.count, testedAt: new Date().toISOString() }, null, 2));
+    distribution: 'porncleaner-chrome.zip', datasetVersion: first.dataset.version, domainCount: first.dataset.count, testedAt: new Date().toISOString() }, null, 2));
   console.log(`All ${passed.length} browser checks passed. Screenshots and report are in artifacts/.`);
 } catch (error) {
   await writeFile('artifacts/browser-test-report.json', JSON.stringify({ passed, failed: [String(error)], pageErrors }, null, 2));

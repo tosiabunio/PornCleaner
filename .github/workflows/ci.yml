@@ -44,13 +44,10 @@ jobs:
       - name: Test in a disposable browser profile
         run: npm run test:browser
 
-      - name: Package extension
-        run: npm run package
-
       - name: Save installable ZIP
         uses: actions/upload-artifact@v7.0.1
         with:
-          path: artifacts/porncleaner-*.zip
+          path: artifacts/porncleaner-chrome.zip
           archive: false
           if-no-files-found: error
           retention-days: 14

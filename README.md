@@ -6,20 +6,16 @@ Automatic cleaning starts enabled. Installation cleans existing matching history
 
 ## Install
 
-Build the extension after cloning or downloading this repository. Node.js 22 is selected by `.nvmrc`:
+**Download `porncleaner-chrome.zip` from this repository's Releases page.** It includes the ready-to-use extension and an offline installation guide. Setup needs no build or terminal commands.
 
-```sh
-npm ci
-npm run build
-```
+1. Extract the ZIP and move the **PornCleaner** folder somewhere permanent, such as Documents.
+2. Open **START-HERE.html** for the illustrated guide.
+3. In desktop Chrome, open `chrome://extensions`, turn on **Developer mode**, and click **Load unpacked**.
+4. Select **PornCleaner → Chrome**, the folder containing `manifest.json`.
 
-1. Open `chrome://extensions` in desktop Chrome.
-2. Enable **Developer mode** and choose **Load unpacked**.
-3. Select this project's `dist` folder.
+The management page opens automatically. Pin PornCleaner from Chrome's puzzle-piece menu to access its pause control. Keep the extracted folder in place.
 
-Pin PornCleaner from Chrome's extensions menu to access its pause control. The management page opens on first installation. Keep the unpacked folder in place; after rebuilding, click **Reload** on the extension card.
-
-If you have a packaged `porncleaner-VERSION.zip`, extract it to a permanent folder and load that folder instead. The ZIP already contains the built extension. The `dist/` directory and ZIP files are generated locally and are excluded from Git.
+See [the installation guide](docs/INSTALL.md) for Windows/macOS extraction steps, manual updates, and troubleshooting. The standard “Add to Chrome” flow requires a Chrome Web Store release; this ZIP uses Developer mode.
 
 Installing starts cleanup immediately. Deletions remove all visits to matching URLs, cannot be undone by this extension, and may propagate to other devices through Chrome history sync. Google account search activity is separate.
 
@@ -56,11 +52,11 @@ npm run test:browser
 npm run package
 ```
 
-`npm run check` typechecks, runs unit tests, and builds `dist/`. The browser test loads a copy of the production build into a newly created temporary profile. It seeds synthetic history through a separate helper extension and never visits the seeded websites or opens your regular Chrome profile. Screenshots and a machine-readable report are written to `artifacts/`.
+`npm run check` typechecks, runs unit tests, and builds `dist/`. Developers can load `dist/` directly through Chrome's **Load unpacked** control. The browser-test command packages the distribution ZIP, extracts it, and loads its **PornCleaner/Chrome** folder into a newly created temporary profile. It seeds synthetic history through a separate helper extension and never visits the seeded websites or opens your regular Chrome profile. It also checks the packaged offline installation guide. Screenshots and a machine-readable report are written to `artifacts/`.
 
-The packaged ZIP is `artifacts/porncleaner-0.1.0.zip`; extract it to a permanent directory before using Load unpacked. Chrome Web Store submission is a separate distribution step.
+Share **`artifacts/porncleaner-chrome.zip`** with end users. The build also keeps a versioned copy, `artifacts/porncleaner-0.1.0.zip`, and generates `artifacts/release-notes.md` for the download page. Both ZIPs contain the same ready-to-use **PornCleaner** folder with installation instructions. Chrome Web Store submission is a separate distribution step.
 
-GitHub Actions runs these checks using the committed dataset and saves the installable ZIP and browser-test artifacts. See [CONTRIBUTING.md](CONTRIBUTING.md) for development guidance and [docs/GITHUB.md](docs/GITHUB.md) for the first upload and release process.
+GitHub Actions runs these checks using the committed dataset and saves the distribution ZIP and browser-test artifacts. Run the **Prepare release** workflow to create a tested draft GitHub release with the ZIP and installation instructions already attached; publish it when ready. See [CONTRIBUTING.md](CONTRIBUTING.md) for development guidance and [docs/GITHUB.md](docs/GITHUB.md) for the first upload and release process.
 
 ## Refresh the domain list
 
@@ -114,6 +110,7 @@ Promotion requires a matching candidate fingerprint, rejects failed/empty collec
 | `src/worker.ts` | Chrome API adapter, visit events, job serialization, and alarm recovery |
 | `src/ui.ts`, `extension/` | Popup, management interface, styles, and manifest |
 | `scripts/` | Source collection, dataset promotion, build, and packaging |
+| `distribution/`, `docs/INSTALL.md` | Offline and online end-user installation guides |
 | `data/domains.json` | Approved runtime list |
 | `data/provenance.json` | Source evidence and review fingerprint |
 | `data/exclusions.json`, `data/whole-site-domains.json` | Maintained exclusion and whole-site scope decisions |

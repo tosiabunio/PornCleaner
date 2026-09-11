@@ -8,7 +8,7 @@
     "build": "tsx scripts/build.ts",
     "typecheck": "tsc --noEmit",
     "test": "tsx --test tests/*.test.ts",
-    "test:browser": "tsx tests/browser.ts",
+    "test:browser": "npm run package && tsx tests/browser.ts",
     "scrape": "tsx scripts/scrape.ts",
     "approve:data": "tsx scripts/approve-data.ts",
     "package": "npm run build && tsx scripts/package.ts",

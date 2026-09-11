@@ -1,0 +1,51 @@
+PORN CLEANER {{VERSION}} — INSTALLATION
+Desktop Google Chrome {{MIN_CHROME}}+ on Windows, macOS, or Linux
+
+For the illustrated guide, open START-HERE.html.
+
+BEFORE YOU INSTALL
+Cleaning starts immediately. PornCleaner deletes existing and future history
+for {{DOMAIN_COUNT}} listed domains. Deletion cannot be undone and may sync to
+your other Chrome devices. You can pause cleaning after installation.
+
+1. EXTRACT THE ZIP
+   Windows: right-click the ZIP and choose Extract All.
+   macOS: double-click the ZIP. Linux: use your file manager's Extract option.
+   Move the extracted PornCleaner folder to a permanent place, such as Documents.
+
+2. OPEN CHROME
+   Type chrome://extensions into Chrome's address bar and press Enter.
+
+3. ENABLE DEVELOPER MODE
+   Turn on Developer mode at the top right, then click Load unpacked.
+
+4. SELECT THE CHROME FOLDER
+   Inside PornCleaner, select the folder called Chrome and confirm.
+   It contains manifest.json. Select the folder, not a file or the ZIP.
+
+DONE
+The management page opens automatically. Cleaning is on.
+Use Chrome's puzzle-piece icon to pin PornCleaner to the toolbar.
+Click Pause cleaning to pause. Add exceptions to keep specific domains.
+Keep the extracted folder where you installed it: Chrome loads files from it.
+
+UPDATES
+Updates for this installation are manual. Download and extract the new version.
+Replace the files inside the original Chrome folder with the new Chrome files,
+keeping the same folder location. Click Reload on PornCleaner at
+chrome://extensions. Your saved pause setting and exceptions are retained.
+You can export settings from PornCleaner first as a backup.
+
+TROUBLESHOOTING
+"Manifest file is missing": extract the ZIP and select PornCleaner/Chrome.
+Developer mode unavailable: your organization may manage Chrome; ask its admin.
+This package is for desktop Chrome, not Chrome on a phone or tablet.
+
+REMOVE
+Open chrome://extensions and click Remove on PornCleaner.
+The extension cannot restore previously deleted history.
+
+PRIVACY
+Matching runs locally. This cleans matching browser history, not cookies,
+bookmarks, downloads, open tabs, or Google account search activity.
+The domain list is not exhaustive; you can add custom domains in settings.
