@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>PornCleaner · History &amp; domains</title><link rel="stylesheet" href="styles.css"><script src="ui.js" type="module"></script></head>
+<body class="dashboard"><main>
+  <header class="topbar"><div class="brand"><span class="mark" aria-hidden="true">P</span><div><strong>PornCleaner</strong><span class="eyebrow">PRIVATE BY DESIGN</span></div></div><span class="local-label">● Runs on this device</span></header>
+  <section class="intro"><span class="eyebrow">YOUR HISTORY. YOUR CHOICE.</span><h1>A little less history.<br>A little more privacy.</h1><p>Automatically clear visits to listed adult domains, with control over what stays.</p></section>
+  <p id="error" class="error" role="alert" hidden></p><p id="notice" class="notice" role="status" hidden></p>
+  <div class="overview">
+    <section class="protection card"><span class="eyebrow">AUTOMATIC CLEANING</span><h2 id="mode">Connecting…</h2><p id="mode-note">Checking your local settings.</p><button id="toggle" class="primary" disabled>Loading…</button></section>
+    <section class="card list-summary"><span class="eyebrow">DOMAIN LIST</span><div id="domain-count" class="big-number">—</div><p id="dataset-date"></p><p id="coverage" class="muted"></p><details><summary>Browse bundled domains</summary><input id="rule-search" type="search" placeholder="Filter domains" aria-label="Filter bundled domains"><div id="bundled-rules" class="scroll-list"></div></details></section>
+  </div>
+  <section class="card"><div class="section-top"><div><span class="eyebrow">HISTORY</span><h2>Review a cleanup</h2></div><button id="scan" class="secondary">Pause &amp; scan</button></div>
+    <p class="muted">A manual scan pauses automatic cleaning so you can review the results. Turn it back on when you are ready.</p>
+    <p id="activity" role="status">Loading status…</p><div id="progress" class="progress" hidden><span></span></div>
+    <div id="job-actions" class="actions"><button id="cancel" class="secondary" hidden>Stop cleanup</button><button id="retry" class="secondary" hidden>Retry failed URLs</button><button id="clear" class="text-button" hidden>Clear preview</button></div>
+    <div id="preview" hidden><div class="table-wrap"><table><thead><tr><th><input id="select-all" type="checkbox" checked aria-label="Select all domains"></th><th>Domain</th><th>URLs</th><th>Actions</th></tr></thead><tbody id="matches"></tbody></table></div>
+      <p class="fine">Deselecting affects this manual cleanup. “Keep” adds a permanent exception for automatic cleaning too. URL details show up to 100 entries per domain.</p>
+      <div class="delete-bar"><p>Delete all visits to the selected URLs?<br><span class="muted">This cannot be undone and may sync to other devices.</span></p><button id="delete" class="danger">Delete selected history</button></div>
+    </div>
+  </section>
+  <div class="rules-grid">
+    <section class="card"><span class="eyebrow">ALWAYS KEEP</span><h2>Your exceptions</h2><p class="muted">These domains stay in history. Exceptions override every cleanup rule.</p><form id="exception-form" class="rule-form"><label for="exception-domain">Domain</label><div class="input-row"><input id="exception-domain" placeholder="example.com" required maxlength="254"><button class="secondary">Keep domain</button></div><label class="check-label"><input id="exception-subdomains" type="checkbox" checked> Include subdomains</label></form><ul id="exceptions" class="rule-list"></ul></section>
+    <section class="card"><span class="eyebrow">ALSO CLEAN</span><h2>Your custom domains</h2><p class="muted">Add a domain missing from the list. All its matching history is eligible for deletion.</p><form id="custom-form" class="rule-form"><label for="custom-domain">Domain</label><div class="input-row"><input id="custom-domain" placeholder="example.com" required maxlength="254"><button class="secondary">Add domain</button></div><label class="check-label"><input id="custom-subdomains" type="checkbox" checked> Include subdomains</label></form><ul id="customRules" class="rule-list"></ul></section>
+  </div>
+  <section class="card settings-card"><div><h2>Take your settings with you</h2><p class="muted">Exports contain only your on/off setting, custom domains, and exceptions. Importing replaces these settings.</p></div><div class="actions"><button id="export" class="secondary">Export settings</button><label class="file-button secondary">Import settings<input id="import" type="file" accept="application/json,.json"></label></div></section>
+  <footer><p><strong>Automatic cleaning starts on.</strong> It removes existing matches and future matching visits after they are recorded. Deletions cannot be undone. Chrome history sync may carry deletions to your other devices.</p><p>Browsing history stays on this device during processing. Cookies, bookmarks, downloads, open tabs, and Google account search activity are outside this cleanup. No analytics or remote lookups.</p></footer>
+</main></body></html>

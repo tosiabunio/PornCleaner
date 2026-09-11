@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "PornCleaner",
+  "version": "0.1.0",
+  "description": "Automatically removes history for listed adult domains. Runs locally, with a pause control and exceptions.",
+  "minimum_chrome_version": "120",
+  "permissions": ["history", "storage", "alarms"],
+  "background": { "service_worker": "worker.js", "type": "module" },
+  "action": { "default_popup": "popup.html", "default_title": "PornCleaner" },
+  "options_ui": { "page": "manage.html", "open_in_tab": true },
+  "content_security_policy": {
+    "extension_pages": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'"
+  }
+}

@@ -1,0 +1,33 @@
+# Dependencies, build output, and local verification
+node_modules/
+/dist/
+/artifacts/
+/.cache/
+/.browsers/
+/coverage/
+/test-results/
+/playwright-report/
+*.tsbuildinfo
+
+# Unreviewed collections and local rollback copies
+/data/candidate*.json
+/data/archive/
+*.tmp
+*.log
+
+# Local configuration, credentials, and signing keys
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.crx
+/.npmrc
+/.agents/
+/.codex/
+/.idea/
+/.vscode/
+.DS_Store
+Thumbs.db

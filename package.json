@@ -1,0 +1,34 @@
+{
+  "name": "porncleaner",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Local Chrome history cleanup using a reviewed domain list.",
+  "scripts": {
+    "build": "tsx scripts/build.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test tests/*.test.ts",
+    "test:browser": "tsx tests/browser.ts",
+    "scrape": "tsx scripts/scrape.ts",
+    "approve:data": "tsx scripts/approve-data.ts",
+    "package": "npm run build && tsx scripts/package.ts",
+    "check": "npm run typecheck && npm test && npm run build"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "cheerio": "1.2.0",
+    "robots-parser": "3.0.1",
+    "tldts": "7.4.12"
+  },
+  "devDependencies": {
+    "@types/chrome": "0.2.9",
+    "@types/node": "22.20.2",
+    "esbuild": "0.28.2",
+    "playwright": "1.63.0",
+    "tsx": "4.23.13",
+    "typescript": "7.0.2"
+  },
+  "license": "Unlicense"
+}
