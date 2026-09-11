@@ -54,7 +54,7 @@ npm run package
 
 `npm run check` typechecks, runs unit tests, and builds `dist/`. Developers can load `dist/` directly through Chrome's **Load unpacked** control. The browser-test command packages the distribution ZIP, extracts it, and loads its **PornCleaner/Chrome** folder into a newly created temporary profile. It seeds synthetic history through a separate helper extension and never visits the seeded websites or opens your regular Chrome profile. It also checks the packaged offline installation guide. Screenshots and a machine-readable report are written to `artifacts/`.
 
-Share **`artifacts/porncleaner-chrome.zip`** with end users. The build also keeps a versioned copy, `artifacts/porncleaner-0.1.0.zip`, and generates `artifacts/release-notes.md` for the download page. Both ZIPs contain the same ready-to-use **PornCleaner** folder with installation instructions. Chrome Web Store submission is a separate distribution step.
+Share **`artifacts/porncleaner-chrome.zip`** with end users. The build also keeps a versioned copy, `artifacts/porncleaner-1.0.0.zip`, and generates `artifacts/release-notes.md` for the download page. Both ZIPs contain the same ready-to-use **PornCleaner** folder with installation instructions. Chrome Web Store submission is a separate distribution step.
 
 GitHub Actions runs these checks using the committed dataset and saves the distribution ZIP and browser-test artifacts. Run the **Prepare release** workflow to create a tested draft GitHub release with the ZIP and installation instructions already attached; publish it when ready. See [CONTRIBUTING.md](CONTRIBUTING.md) for development guidance and [docs/GITHUB.md](docs/GITHUB.md) for the first upload and release process.
 
