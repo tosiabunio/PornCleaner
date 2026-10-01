@@ -20,7 +20,7 @@
   "dependencies": {
     "cheerio": "1.2.0",
     "robots-parser": "3.0.1",
-    "tldts": "7.4.12"
+    "tldts": "7.4.16"
   },
   "devDependencies": {
     "@types/chrome": "0.2.9",
