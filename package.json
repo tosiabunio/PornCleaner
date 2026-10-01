@@ -23,7 +23,7 @@
     "tldts": "7.4.12"
   },
   "devDependencies": {
-    "@types/chrome": "0.2.9",
+    "@types/chrome": "0.3.3",
     "@types/node": "22.20.2",
     "esbuild": "0.28.2",
     "playwright": "1.63.0",
