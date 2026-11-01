@@ -45,7 +45,7 @@ jobs:
         run: npm run test:browser
 
       - name: Save installable ZIP
-        uses: actions/upload-artifact@v7.0.1
+        uses: actions/upload-artifact@v7.0.2
         with:
           path: artifacts/porncleaner-chrome.zip
           archive: false
@@ -54,7 +54,7 @@ jobs:
 
       - name: Save browser report and screenshots
         if: ${{ always() }}
-        uses: actions/upload-artifact@v7.0.1
+        uses: actions/upload-artifact@v7.0.2
         with:
           name: browser-test-results
           path: |
